@@ -421,8 +421,38 @@ class LeetCode1Test {
 
         val result = divideArray(listOf(2,4,2,2,5,2).toIntArray(), 2)
         println(result.toList().map { it.toList() })
-
     }
+
+    /**
+     * https://leetcode.com/problems/first-missing-positive/description/
+     **/
+    @Test //First Missing Positive
+    fun test_firstMissingPositive() {
+        fun firstMissingPositive(nums: IntArray): Int {
+            return 0
+        }
+    }
+
+    /**
+     * https://leetcode.com/problems/kth-largest-element-in-an-array/description/
+     */
+    @Test //Kth Largest Element in an Array
+    //performance: beats 59%
+    //memory: beats 98%
+    fun test_findKthLargest() {
+        fun findKthLargest(nums: IntArray, k: Int): Int {
+            val priorityQueue = PriorityQueue<Int>(k, Collections.reverseOrder())
+            for (num in nums) {
+                priorityQueue.add(num)
+            }
+            for (i in 1 until k) {
+                priorityQueue.poll()
+            }
+            return priorityQueue.poll()
+        }
+        println(findKthLargest(listOf(3,2,1,5,6,4).toIntArray(), 2))
+    }
+
 
 
 }
