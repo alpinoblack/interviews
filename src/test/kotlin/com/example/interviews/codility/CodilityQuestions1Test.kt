@@ -3,7 +3,6 @@ package com.example.interviews.codility
 import org.junit.jupiter.api.Test
 import java.util.*
 import kotlin.math.abs
-import kotlin.random.Random
 
 class CodilityQuestions1Test {
 
@@ -194,7 +193,7 @@ class CodilityQuestions1Test {
     //Got 100% in correctness and performance
     fun test_maxCounters() {
         fun solution(N: Int, A: IntArray): IntArray {
-            var currentMax = 0;
+            var currentMax = 0
             var currentMaxForAllCounters = 0
             val countArray = IntArray(N) { 0 }
             for (element in A) {
