@@ -6,6 +6,9 @@ import kotlin.math.abs
 
 class CodilityQuestions1Test {
 
+    /**
+     * https://app.codility.com/programmers/lessons/1-iterations/binary_gap/
+     */
     @Test //BinaryGap
     //Got 100% correctness
     fun test_binaryGap() {
@@ -46,6 +49,9 @@ class CodilityQuestions1Test {
 
     }
 
+    /**
+     * https://app.codility.com/programmers/lessons/2-arrays/cyclic_rotation/
+     */
     @Test //CyclicRotation
     //simple solution
     //Got 100% correctness
@@ -77,6 +83,9 @@ class CodilityQuestions1Test {
 
     }
 
+    /**
+     * https://app.codility.com/programmers/lessons/2-arrays/odd_occurrences_in_array/
+     */
     @Test //OddOccurrencesInArray
     //Got 100% in both correctness and performance
     fun test_oddOccurrencesInArray() {
@@ -89,6 +98,9 @@ class CodilityQuestions1Test {
         }
     }
 
+    /**
+     * https://app.codility.com/programmers/lessons/3-time_complexity/frog_jmp/
+     */
     @Test //FrogJmp
     //Got 100% in correctness and performance
     fun test_frogJmp() {
@@ -102,6 +114,9 @@ class CodilityQuestions1Test {
         }
     }
 
+    /**
+     * https://app.codility.com/programmers/lessons/3-time_complexity/perm_missing_elem/
+     */
     @Test //PermMissingElem
     //Got 100% in correctness and performance
     fun test_permMissingElem() {
@@ -114,6 +129,9 @@ class CodilityQuestions1Test {
         }
     }
 
+    /**
+     * https://app.codility.com/programmers/lessons/3-time_complexity/tape_equilibrium/
+     */
     @Test //TapeEquilibrium
     //Got 100% correctness and performance
     fun test_tapeEquilibrium() {
@@ -141,6 +159,9 @@ class CodilityQuestions1Test {
         println(solution(listOf(3, 1, 2, 4, 3).toIntArray()))
     }
 
+    /**
+     * https://app.codility.com/programmers/lessons/4-counting_elements/frog_river_one/
+     */
     @Test //FrogRiverOne
     //Got 100% in correctness and performance
     fun test_frogRiverOne() {
@@ -162,6 +183,9 @@ class CodilityQuestions1Test {
         println(solution(5, listOf(1,3,1,4,2,3,5,4).toIntArray()))
     }
 
+    /**
+     * https://app.codility.com/programmers/lessons/4-counting_elements/perm_check/
+     */
     @Test //PermCheck
     //Got 100% in correctness and performance
     fun test_permCheck() {
@@ -188,8 +212,10 @@ class CodilityQuestions1Test {
         println(solution(listOf(4,1,3).toIntArray()))
     }
 
+    /**
+     * https://app.codility.com/programmers/lessons/4-counting_elements/max_counters/
+     */
     @Test //MaxCounters
-    //This is a medium difficulty question
     //Got 100% in correctness and performance
     fun test_maxCounters() {
         fun solution(N: Int, A: IntArray): IntArray {
@@ -231,6 +257,37 @@ class CodilityQuestions1Test {
         linkedList.removeAt(2)
     }
 
+    /**
+     * https://app.codility.com/programmers/lessons/4-counting_elements/missing_integer/
+     */
+    @Test
+    //got 100% correctness and performance
+    fun test_MissingInteger_withSort() { //todo can accomplish with linear time
+        fun solution(A: IntArray): Int {
+            val sortedArray = A.sortedArray()
+            var currentPositive = 0
+            for (e in sortedArray) {
+                if (e > 0) {
+                    if (e != currentPositive) {
+                        if (e != currentPositive + 1) {
+                            return currentPositive + 1
+                        } else {
+                            currentPositive++
+                        }
+                    }
+                }
+            }
+            return currentPositive + 1
+        }
+
+       // println(solution(listOf(1, 2, 3).toIntArray()))
+        println(solution(listOf(1, 3, 6, 4, 1, 2).toIntArray()))
+        println(solution(listOf(-1, -3).toIntArray()))
+    }
+
+    /**
+     * https://app.codility.com/programmers/lessons/7-stacks_and_queues/brackets/
+     */
     @Test
     //Got 100% in performance and correctness
     fun test_Brackets() {

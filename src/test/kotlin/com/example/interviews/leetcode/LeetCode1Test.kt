@@ -453,6 +453,65 @@ class LeetCode1Test {
         println(findKthLargest(listOf(3,2,1,5,6,4).toIntArray(), 2))
     }
 
+    /**
+     * https://leetcode.com/problems/rotate-image/
+     */
+    @Test //48. Rotate Image
+    // beats 74% in performance and 93% in memory
+    fun test_rortateImage() {
+        fun rotate(matrix: Array<IntArray>) {
+
+            for (layer in 0 until matrix.size / 2) {
+
+                val row = ArrayList<Int>(matrix.size - layer * 2)
+                val row2 = ArrayList<Int>(matrix.size - layer * 2)
+                for (i in layer until matrix.size - layer) {
+                    row.add(matrix[layer][i])
+                    row2.add(matrix[i][matrix.size - 1 - layer])
+                }
+
+                val row3 = ArrayList<Int>(matrix.size - layer * 2)
+                val row4 = ArrayList<Int>(matrix.size - layer * 2)
+                for (i in matrix.size - 1 - layer downTo layer) {
+                    row3.add(matrix[matrix.size - 1 - layer][i])
+                    row4.add(matrix[i][layer])
+                }
+
+                //putting it back
+
+                for ((counter, i) in (layer until matrix.size - layer).withIndex()) {
+                    matrix[i][matrix.size - 1 - layer] = row[counter]
+                    matrix[layer][i] = row4[counter]
+                }
+
+                for ((counter, i) in (matrix.size - 1 - layer downTo layer).withIndex()) {
+                    matrix[matrix.size - 1 - layer][i] = row2[counter]
+                    matrix[i][layer] = row3[counter]
+                }
+
+            }
+
+        }
+
+        val image = listOf(
+                listOf(1, 2, 3).toIntArray(),
+                listOf(4, 5, 6).toIntArray(),
+                listOf(7, 8, 9).toIntArray(),
+        ).toTypedArray()
+
+        rotate(image)
+
+        val image2 = listOf(
+                listOf(5,1,9,11).toIntArray(),
+                listOf(2,4,8,10).toIntArray(),
+                listOf(13,3,6,7).toIntArray(),
+                listOf(15,14,12,16).toIntArray(),
+        ).toTypedArray()
+
+        rotate(image2)
+
+        println("ok")
+    }
 
 
 }

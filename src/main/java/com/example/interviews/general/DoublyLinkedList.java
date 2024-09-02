@@ -3,6 +3,7 @@ package com.example.interviews.general;
 import java.util.ArrayList;
 import java.util.List;
 
+//todo implement reversed()
 public class DoublyLinkedList<T> {
   private ListNode<T> head;
   private ListNode<T> tail;
