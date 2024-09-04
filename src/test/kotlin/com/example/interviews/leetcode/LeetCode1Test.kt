@@ -513,5 +513,17 @@ class LeetCode1Test {
         println("ok")
     }
 
+    /**
+     * https://leetcode.com/problems/search-in-rotated-sorted-array/description/
+     */
+/*    @Test
+    fun test_searchRotatedSortedArray() {
+        fun search(nums: IntArray, target: Int): Int {
+
+        }
+
+        println(search(listOf(4,5,6,7,0,1,2).toIntArray(), 0))
+    }*/
+
 
 }
