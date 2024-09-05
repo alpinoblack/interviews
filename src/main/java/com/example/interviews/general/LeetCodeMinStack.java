@@ -7,7 +7,7 @@ import java.util.Stack;
  * For the sake of simplicity LeetCode only requires to implement for simple int
  */
 // correct solution, in performance beats 80%, in memory beats 50%
-// This changes rapidly with multiple submissions
+// This changes rapidly with each submission
 class LeetCodeMinStack {
   private final Stack<Integer> innerStack;
   private final Stack<Integer> auxStack;

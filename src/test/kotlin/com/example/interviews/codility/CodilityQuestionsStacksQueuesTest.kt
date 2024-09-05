@@ -3,9 +3,7 @@ package com.example.interviews.codility
 import org.junit.jupiter.api.Test
 import java.util.*
 
-//Iterations, Sort, Array, Time Complexity, Counting Elements
-class CodilityQuestionsStacksQueueusTest {
-
+class CodilityQuestionsStacksQueuesTest {
 
     /**
      * https://app.codility.com/programmers/lessons/7-stacks_and_queues/brackets/
