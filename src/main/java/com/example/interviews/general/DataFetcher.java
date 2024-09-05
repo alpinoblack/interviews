@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Stack;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 public class DataFetcher {
 
   private static final ExecutorService executor = Executors.newFixedThreadPool(4);
-  private static final ScheduledExecutorService timer = Executors.newScheduledThreadPool(10);
   private static final Random rand = new Random();
 
   private String fetchData(final String input) throws InterruptedException {

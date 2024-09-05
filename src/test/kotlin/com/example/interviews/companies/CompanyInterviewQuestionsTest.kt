@@ -5,9 +5,8 @@ import com.example.interviews.general.linkedListToList
 import com.example.interviews.general.reverse
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import java.time.LocalDate
-import java.time.LocalTime
+import java.util.*
 
 class CompanyInterviewQuestionsTest {
 
@@ -16,6 +15,42 @@ class CompanyInterviewQuestionsTest {
      */
     @Test
     fun test_evaluatePlusMult() {
+
+        fun evaluateArithmeticExpression(exp: String): Int {
+            val pluStack = Stack<Int>()
+            var multAgg: Int? = null
+            var i = 0
+            while(i < exp.length - 1) {
+
+                if (exp[i] == '*') {
+                    multAgg = exp[i - 1].digitToInt() * exp[i + 1].digitToInt()
+                }
+
+                if (exp[i + 1] == '+') {
+                    if (multAgg == null) {
+                        pluStack.push(exp[i].digitToInt())
+                    } else {
+                        pluStack.push(multAgg)
+                        multAgg = null
+                    }
+                }
+                i++
+            }
+
+            if (multAgg != null) {
+                pluStack.push(multAgg)
+            }
+
+            var agg = 0
+            while(pluStack.isNotEmpty()) {
+                agg += pluStack.pop()
+            }
+            return agg
+        }
+
+        println(evaluateArithmeticExpression("1*3*3+1*8+9*7"))
+        println(evaluateArithmeticExpression("1+3+3+1*8+9*7"))
+        println(evaluateArithmeticExpression("1+3*3"))
 
     }
 
