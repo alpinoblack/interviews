@@ -3,7 +3,7 @@ package com.example.interviews.codility
 import org.junit.jupiter.api.Test
 import java.util.*
 
-class CodilityQuestionsCountingElementsTest1 {
+class CodilityQuestionsCountingElementsTest {
 
     /**
      * https://app.codility.com/programmers/lessons/4-counting_elements/frog_river_one/
