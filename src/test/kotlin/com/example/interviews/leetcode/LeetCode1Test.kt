@@ -516,14 +516,63 @@ class LeetCode1Test {
     /**
      * https://leetcode.com/problems/search-in-rotated-sorted-array/description/
      */
-/*    @Test
+    @Test
+    //incorrect solution
     fun test_searchRotatedSortedArray() {
         fun search(nums: IntArray, target: Int): Int {
+            var start = 0
+            var end = nums.size - 1
+            while (start <= end) {
+                val mid = start + (end - start) / 2
+                val candidate = nums[mid]
+                if (candidate == target) {
+                    return mid
+                }
 
+                if (candidate > target) {
+                    if (nums[start] >= target) {
+                        start = mid + 1
+                    } else {
+                        end = mid - 1
+                    }
+                } else {
+                    if (nums[end] <= target) {
+                        start = mid + 1
+                    } else {
+                        end = mid - 1
+                    }
+                }
+
+            }
+            return -1
         }
 
-        println(search(listOf(4,5,6,7,0,1,2).toIntArray(), 0))
-    }*/
+        println(search(listOf(4,5,6,7,0,1,2).toIntArray(), 2))
+        println(search(listOf(5,1,3).toIntArray(), 3))
+    }
+
+    @Test
+    /**
+     * https://leetcode.com/problems/perfect-number/
+     */
+    fun test_checkPerfectNumber() {
+        fun checkPerfectNumber(num: Int): Boolean {
+            var sumOfDivisors = 0
+            var i = 1
+            while (i * i < num) {
+                if (num % i == 0) {
+                    sumOfDivisors += i
+                    val divisorPairOfI = num / i
+                    if (divisorPairOfI != i && i != 1) {
+                        sumOfDivisors += divisorPairOfI
+                    }
+                }
+
+                i++
+            }
+            return sumOfDivisors == num
+        }
+    }
 
 
 }
