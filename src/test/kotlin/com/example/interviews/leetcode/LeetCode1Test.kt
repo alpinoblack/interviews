@@ -632,5 +632,54 @@ class LeetCode1Test {
         println(permute(listOf(1,2,3).toIntArray()))
     }
 
+    /**
+     * https://leetcode.com/problems/longest-substring-without-repeating-characters/
+     */
+    @Test
+    //correct yet suboptimal solution
+    fun test_lengthOfLongestSubstring_suboptimal() {
+        fun lengthOfLongestSubstring(s: String): Int {
+
+            fun checkIfStrIsValid(strForTest: String): Boolean {
+                val seenChars = mutableSetOf<Char>()
+                for (char in strForTest) {
+                    if (seenChars.contains(char)) {
+                        return false
+                    }
+                    seenChars.add(char)
+                }
+                return true
+            }
+
+            if (s.isEmpty()) {
+                return 0
+            }
+
+            if (s.length == 1) {
+                return 1
+            }
+
+            var maxLen = 1
+            var currentMaxLenCandidate = 2
+            while (currentMaxLenCandidate <= s.length) {
+                var flag = false
+                for (i in 0..s.length - currentMaxLenCandidate) {
+                    val currentSubStr = s.substring(i, i + currentMaxLenCandidate)
+                    if (checkIfStrIsValid(currentSubStr)) {
+                        maxLen++
+                        currentMaxLenCandidate++
+                        flag = true
+                        break
+                    }
+                }
+                if (!flag) {
+                    break
+                }
+            }
+            return maxLen
+        }
+
+        println(lengthOfLongestSubstring("abcabcbb"))
+    }
 
 }
