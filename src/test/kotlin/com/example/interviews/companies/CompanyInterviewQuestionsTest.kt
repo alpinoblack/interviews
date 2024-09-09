@@ -4,9 +4,12 @@ import com.example.interviews.general.Node
 import com.example.interviews.general.linkedListToList
 import com.example.interviews.general.reverse
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.`in`
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.random.Random
 
 class CompanyInterviewQuestionsTest {
 
@@ -225,6 +228,61 @@ class CompanyInterviewQuestionsTest {
          * Answer - select role from roles where effective_from is before $date
          * order by effective_from desc limit 1
          */
+    }
+
+    /**
+     * Given an input array, find all possible subsets and return all of them
+     * in a new array which is a superset of the original input array
+     */
+    @Test //recursive solution
+    fun test_findAllSubsets() {
+        fun findAllSubsets(input: List<Int>): List<List<Int>> {
+            if (input.isEmpty()) {
+                return listOf(emptyList())
+            }
+            val subsetsOfListTail = findAllSubsets(input.drop(1))
+            val lists = subsetsOfListTail.map { subset ->
+                listOf(input.first()) + subset
+            }
+            return subsetsOfListTail + lists
+        }
+        val input = listOf(1,2,3)
+        println(findAllSubsets(input))
+
+    }
+
+    /**
+     * Write a function which receives an array and returns an array
+     * with the same values but in different random order
+     */
+    @Test
+    fun test_randomArray() {
+        fun returnRandomArray(input: List<Int>): List<Int> {
+            val randArr = ArrayList<Int>(input.size)
+            val inputCpy = ArrayList<Int>(input)
+            for (i in 0 until input.size - 1) {
+                val currentRandomIndex = Random.nextInt(i, input.size)
+                randArr.add(inputCpy[currentRandomIndex])
+                //swap selected element
+                if (currentRandomIndex != i) {
+                    val temp = inputCpy[i]
+                    inputCpy[i] = inputCpy[currentRandomIndex]
+                    inputCpy[currentRandomIndex] = temp
+                }
+            }
+            randArr.add(inputCpy.last())
+            return randArr
+        }
+
+        val inputArr = listOf(1,2,3,4,5,6,7,8,9)
+        repeat(10) {
+            println("Iteration: $it")
+            val returnedArr = returnRandomArray(inputArr)
+            println("Array is: $returnedArr")
+            assertThat(returnedArr)
+                    .containsExactlyInAnyOrder(*inputArr.toTypedArray())
+                    .isNotEqualTo(inputArr)
+        }
     }
 
 

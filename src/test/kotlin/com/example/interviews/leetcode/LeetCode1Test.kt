@@ -574,5 +574,63 @@ class LeetCode1Test {
         }
     }
 
+    /**
+     * https://leetcode.com/problems/reverse-string/
+     */
+    @Test
+    //correct solution
+    fun test_reverseString() {
+        fun reverseString(s: CharArray) {
+
+            for (i in 0 until s.size / 2) {
+                val temp = s[i]
+                s[i] = s[s.size - 1 - i]
+                s[s.size - 1 - i] = temp
+            }
+
+        }
+
+        val inputStr = listOf("h","e","l","l","o").joinToString().toCharArray()
+        reverseString(inputStr)
+        println(inputStr)
+    }
+
+    /**
+     * https://leetcode.com/problems/permutations/description/
+     */
+    @Test
+    //correct solution
+    //needs optimization
+    fun test_permute() {
+        fun permute(nums: IntArray): List<List<Int>> {
+
+            if (nums.isEmpty()) {
+                return listOf()
+            }
+            if (nums.size == 1) {
+                return listOf(listOf(nums[0]))
+            }
+
+            val totalPerms = mutableListOf<List<Int>>()
+
+            for (i in nums.indices) {
+                if (i != 0) { //swap
+                    val temp = nums[0]
+                    nums[0] = nums[i]
+                    nums[i] = temp
+                }
+                val permutations = permute(nums.drop(1).toIntArray())
+
+                totalPerms.addAll(permutations.map{
+                    listOf(nums[0]) + it
+                })
+            }
+
+            return totalPerms
+        }
+
+        println(permute(listOf(1,2,3).toIntArray()))
+    }
+
 
 }
