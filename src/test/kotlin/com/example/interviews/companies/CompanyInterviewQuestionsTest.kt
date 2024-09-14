@@ -4,12 +4,11 @@ import com.example.interviews.general.Node
 import com.example.interviews.general.linkedListToList
 import com.example.interviews.general.reverse
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.`in`
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.random.Random
+
 
 class CompanyInterviewQuestionsTest {
 
@@ -18,7 +17,6 @@ class CompanyInterviewQuestionsTest {
      */
     @Test
     fun test_evaluatePlusMult() {
-
         fun evaluateArithmeticExpression(exp: String): Int {
             val pluStack = Stack<Int>()
             var multAgg: Int? = null
@@ -255,9 +253,15 @@ class CompanyInterviewQuestionsTest {
      * Write a function which receives an array and returns an array
      * with the same values but in different random order
      */
+
+
     @Test
     fun test_randomArray() {
+
         fun returnRandomArray(input: List<Int>): List<Int> {
+
+            "sdfsdfsdf".withIndex().map { (index, value) ->index to value}.toMap()
+
             val randArr = ArrayList<Int>(input.size)
             val inputCpy = ArrayList<Int>(input)
             for (i in 0 until input.size - 1) {
@@ -284,6 +288,59 @@ class CompanyInterviewQuestionsTest {
                     .isNotEqualTo(inputArr)
         }
     }
+
+    /**
+     * You are given a string representing text and a pivot index.
+     * Write a function which reverses the words in the text according to the pivot
+     * example:
+     * reverseWordsByPivot("helloworld", 3) -> "loworldhel"
+     */
+    @Test
+    fun test_reverseWordsByPivot() {
+        fun reverseWordsByPivot(text: String, pivot: Int): String {
+            val reversed = text.reversed()
+            val leftOfPivot = reversed.substring(0, text.length - pivot).reversed()
+            val rightOfPivot = reversed.substring(text.length - pivot, text.length).reversed()
+            return leftOfPivot + rightOfPivot
+        }
+
+        fun reverseWordsByPivotOptimized(text: String, pivot: Int): String { //didn't change the signature
+
+            fun reverseByIndexes(text: CharArray, startInclusive: Int, endExclusive: Int) {
+                val midPoint = (startInclusive + endExclusive) / 2
+                var counterIndex = 0
+                for (i in startInclusive until midPoint) {
+                    val temp = text[i]
+                    text[i] = text[endExclusive - 1 - counterIndex]
+                    text[endExclusive - 1 - counterIndex] = temp
+                    counterIndex++
+                }
+            }
+
+            val textCharArr = text.toCharArray()
+
+            reverseByIndexes(textCharArr, 0, textCharArr.size)
+            reverseByIndexes(textCharArr, 0, textCharArr.size - pivot)
+            reverseByIndexes(textCharArr, textCharArr.size - pivot, textCharArr.size)
+            return textCharArr.joinToString("")
+        }
+
+        assertThat(reverseWordsByPivot("helloworld", 3)).isEqualTo("loworldhel")
+        assertThat(reverseWordsByPivotOptimized("helloworld", 3)).isEqualTo("loworldhel")
+
+        /**
+         * Can optimize the solution by changing the signature to receive a char[]
+         * since in Java strings are immutables, even changing the string in place will result
+         * in a new string being created.
+         *
+         * Can implement reverse in place and then doing the same reverse on both sub strings
+         * Thus decreasing space complexity to O(1)
+         * Time complexity is O(n/2) for reverse and there is one pivot so only 2 further reverses
+         * O(n/2) + O(n/(2*1stPartitionLength)) + O(n/(2*2ndPartitionLength)) -> O(n)
+         */
+    }
+
+
 
 
 
