@@ -340,6 +340,42 @@ class CompanyInterviewQuestionsTest {
          */
     }
 
+    /**
+     * You have a function called rand5 which returns a random number between 1-5
+     * in uniform distribution, use that function to create a new function called rand7
+     * which returns a random number 1-7 in uniform distribution
+     */
+    @Test
+    fun test_rand7() {
+
+        fun rand5(): Int { //you are given this function, implementation is not important
+            return Random.nextInt(1, 6)
+        }
+
+        fun rand7(): Int {
+            fun rand25(): Int { //returns 1-25 in uniform distribution
+                return (rand5() - 1) * 5 + rand5()
+            }
+
+            var rand7Output = rand25()
+            while (rand7Output > 21) {
+                rand7Output = rand25()
+            }
+            return rand7Output % 7 + 1
+        }
+
+        println(rand7())
+        println(rand7())
+        println(rand7())
+        println(rand7())
+        println(rand7())
+        println(rand7())
+        println(rand7())
+        println(rand7())
+        println(rand7())
+
+    }
+
 
 
 

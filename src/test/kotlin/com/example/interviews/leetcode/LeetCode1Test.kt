@@ -1,6 +1,8 @@
 package com.example.interviews.leetcode
 
 import org.junit.jupiter.api.Test
+import java.io.File
+import java.io.FileInputStream
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.abs
@@ -628,7 +630,6 @@ class LeetCode1Test {
 
             return totalPerms
         }
-
         println(permute(listOf(1,2,3).toIntArray()))
     }
 
