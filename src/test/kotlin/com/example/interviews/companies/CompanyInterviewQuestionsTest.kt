@@ -373,8 +373,83 @@ class CompanyInterviewQuestionsTest {
         println(rand7())
         println(rand7())
         println(rand7())
-
     }
+
+    /**
+     * Create a randomized copy of an array, without changing
+     * the original array. You are given a function called rand(i,j)
+     * where i < x < j which means that the function will return a random
+     * value between i and j
+     */
+    @Test
+    fun test_createARandomizedCopyOfAnArray() {
+        fun rand(i: Int, j: Int): Int {
+            return Random.nextInt(i, j)
+        }
+
+        fun randomizedArrCpy(nums: IntArray): IntArray {
+            val randomizedArr = nums.copyOf()
+            for (i in nums.indices) {
+                val randomIndex = rand(i, nums.size)
+                if (randomIndex != i) {
+                    val temp = randomizedArr[i]
+                    val chosenValue = randomizedArr[randomIndex]
+                    randomizedArr[i] = chosenValue
+                    randomizedArr[randomIndex] = temp
+                }
+            }
+            return randomizedArr
+        }
+
+        println(randomizedArrCpy(listOf(1,2,3,4).toIntArray()).toList())
+    }
+
+    /**
+     * You are given a list of intervals which represent the start and end of a meeting.
+     * For instance, [1,4] represents a meeting which started on 1 and finished on 4. Find the
+     * minimum number of required rooms for all the meetings
+     * Example: input is [[4,9], [5,18], [10,12]] output is 2
+     * Since from 4 to 5 there is a single meeting, from 5 to 9 we have 2 meetings
+     * at 9 the first meeting is finished, and we are left with a single meeting.
+     * after 10 we again have 2 meetings
+     */
+
+    @Test
+    fun test_findMinimumNumberOfRooms() {
+        fun findMinimumNumberOfRooms(meetings: List<List<Int>>): Int {
+            //assuming each meeting is a 2 element list, and all the lists are valid
+            //and also the first element is smaller than the 2nd element of each sublist
+            val meetingStartTimes = meetings.map { it[0] }.sorted()
+            val meetingsEndTimes = meetings.map { it[1] }.sorted()
+
+            var endTimesInd = 0
+            var startTimesInd = 0
+            var currentMeetingsOverlap = 0
+            var maxMeetingsOverlap = 0
+            while (endTimesInd < meetings.size && startTimesInd < meetings.size) {
+                if (meetingStartTimes[startTimesInd] < meetingsEndTimes[endTimesInd]) {
+                    currentMeetingsOverlap ++
+                    startTimesInd ++
+                } else {
+                    currentMeetingsOverlap --
+                    endTimesInd ++
+                }
+                if (maxMeetingsOverlap < currentMeetingsOverlap) {
+                    maxMeetingsOverlap = currentMeetingsOverlap
+                }
+            }
+
+            return maxMeetingsOverlap
+        }
+
+        println(findMinimumNumberOfRooms(listOf(
+                listOf(4,9),
+                listOf(9,10),
+                listOf(11,12)
+                )))
+    }
+
+
 
 
 

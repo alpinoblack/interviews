@@ -1,6 +1,12 @@
 package com.example.interviews.general
 
 /**
+ * The following questions were all given in multiple interviews
+ * of a single company.
+ */
+
+
+/**
  * Given a list of strings, return a list of matching string lengths
  */
 fun question1(words: List<String>): List<Int> {
@@ -57,10 +63,36 @@ fun question2(nums: List<Int>): List<Int> {
  */
 
 /**
- * Design an elevator system
- * todo
+ * write a function which takes a list of integers
+ * and returns the sum of even and odd numbers in a single pass
  */
+fun question3(numbers: List<Int>): Pair<Int, Int> {
+    return numbers.fold(Pair(0, 0)) { acc, num ->
+        if (num % 2 == 0) {
+            Pair(acc.first + num, acc.second)
+        } else {
+            Pair(acc.first, acc.second + num)
+        }
+    }
+}
+
+/**
+ * Design a parking lot building. The parking lot has
+ * multiple floors and each floor has multiple spots. There are different types
+ * of vehicles which require different types of parking spots. There can be for instance
+ * a private 4 wheel Sedan, a 2 wheel motorcycle, a truck and so forth.
+ * The parking lot also offer specialized parking spots for handicapped people and electrical vehicle
+ * parking spots with chargers. Any of the types of vehicle can have any combination of the specialized vehicle
+ * parking spots.
+ */
+
+
 
 fun main() {
     println(question2(listOf(5,2,1,2,3,4,6,7,6)))
 }
+
+/**
+ * Design an elevator system
+ * todo
+ */

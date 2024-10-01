@@ -26,7 +26,7 @@ data class OpenQuestion(question: String,
 ```
 
 Reasons for Choosing this Representation:
-1. Currently there are only 2 types of questions, but in the future we might want to introduce new types of questions. Choosing a *sealed class hierarchy* will make sure that every *concrete* type of question is well defined an accountant for.
+1. Currently, there are only 2 types of questions, but in the future we might want to introduce new types of questions. Choosing a *sealed class hierarchy* will make sure that every *concrete* type of question is well defined an accountant for.
 2. Since we don't know exactly how many question types we will have beforehand there is no point in defining a separate field for each type in the *Survey* class.
 3. Since a *survey* can have any number of questions from any type in any order, keeping them in a single list is a close representation of how the data is displayed.
 
@@ -160,3 +160,17 @@ if (aggRdd.size < 1000) {
 
 ```
 
+## Question 5 - Design a System for Downloading files from S3
+You are given an HTTP server which has 2 endpoints:
+1. POST api/v1/prepare/{FILE_ID} which gets a file ID and "prepares"
+a file for download from S3. The call returns immediately but the actual
+preparation can take as long as it needs to.
+2. GET api/v1/status/{FILE_ID} which gets a file ID and check the status
+of a file. It can return 2 types of answer
+   1. Not Ready (200) which means the preparation haven't yet finished
+   2. Ready, along with the path of the actual file in s3
+Design a system which will download 100 files (ID 1 to 100 but), save them
+locally and then merge them.
+When designing a system make sure you prepare for scale, for instance the variance
+in time to prepare between files can be great. Also what if you need to download
+1 million files?
