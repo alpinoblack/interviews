@@ -5,7 +5,7 @@ The form is a survey, it contains:
    1. A **title** which is the name of the survey
    2. 1 or more questions, each question can be:
       * Open Question
-      * Close Question - each closed question have a list of 1 
+      * Closed Question - each closed question have a list of 1 
       or more options to choose from
 2. Represent it using Objects/Classes in a programming language
 of your choice.
